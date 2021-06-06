@@ -1,28 +1,42 @@
 <template>
-  <div id="app">
-      <h1>Hello Vue</h1>
-      <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+<div id="app">
+    <h1>Hello Vue</h1>
+    <HelloWorld msg="Welcome to Your Vue.js App"/>
+</div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import HelloWorld from './components/HelloWorld.vue';
+import axios from 'axios';
 
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+    name: 'App',
+    components: {
+        HelloWorld,
+    },
+    methods: {
+        async getMessage() {
+            try {
+                const { data } = await axios.get('https://rielt-gk.herokuapp.com/');
+                console.log(data);
+            } catch (error) {
+                console.error(error);
+            }
+        }
+    },
+    mounted() {
+        this.getMessage();
+    },
+};
 </script>
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #2c3e50;
+    margin-top: 60px;
 }
 </style>
